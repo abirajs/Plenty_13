@@ -48,7 +48,7 @@ class CreateNovalnetPaymentMethods1200
      */
     public function run()
     {
-            $this->createPaymentMethodByPaymentKey($paymentMethodKey, $paymentMethodName);
+            $this->createPaymentMethodByPaymentKey();
     }
 
     /**
@@ -57,7 +57,7 @@ class CreateNovalnetPaymentMethods1200
      * @param string $paymentKey
      * @param string $name
      */
-    private function createPaymentMethodByPaymentKey($paymentKey, $name)
+    private function createPaymentMethodByPaymentKey()
     {
         $payment_data = $this->paymentHelper->getPaymentMethodByKey($paymentKey);
         if($payment_data == 'no_paymentmethod_found') {
