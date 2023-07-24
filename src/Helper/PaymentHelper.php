@@ -47,12 +47,12 @@ class PaymentHelper
      *
      * @return string|int
      */
-    public function getPaymentMethodByKey($paymentKey)
+    public function getPaymentMethodByKey()
     {
         $paymentMethods = $this->paymentMethodRepository->allForPlugin('plenty_novalnet');
         if(!is_null($paymentMethods)) {
             foreach($paymentMethods as $paymentMethod) {
-                if($paymentMethod->paymentKey == $paymentKey) {
+                if($paymentMethod->paymentKey == 'NOVALNET') {
                     return [$paymentMethod->id, $paymentMethod->paymentKey, $paymentMethod->name];
                 }
             }
