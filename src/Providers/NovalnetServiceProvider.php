@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is used for registering the BrandCrock payment methods
+ * This file is used for registering the Novalnet payment methods
  * and Event procedures
  *
- * @author       BrandCrock GMBH
- * @copyright(C) BrandCrock
- * @license      https://www.brandcrock.de/payment-plugins/kostenlos/lizenz
+ * @author       Novalnet GMBH
+ * @copyright(C) Novalnet
+ * @license      https://www.novalnet.de/payment-plugins/kostenlos/lizenz
  */
 namespace Novalnet\Providers;
 
@@ -39,7 +39,7 @@ class NovalnetServiceProvider extends ServiceProvider
 		// Render the payment methods
         $this->registerPaymentRendering($eventDispatcher, $basketRepository, $paymentHelper, $paymentService, $sessionStorage, $twig, $settingsService);
         
-		// Set the BrandCrock Assistant
+		// Set the Novalnet Assistant
 		pluginApp(WizardContainerContract::class)->register('payment-novalnet-assistant', NovalnetAssistant::class);
     }
     
