@@ -75,48 +75,7 @@ abstract class NovalnetPaymentAbstract extends PaymentMethodBaseService
      */
     public function isActive(): bool
     {
-        $isPaymentActive = $this->settingsService->getPaymentSettingsValue('payment_active', strtolower($this::PAYMENT_KEY));
-
-        // Hide and Display the Guaranteed and normal Payment based on the guaranteed conditions satisfied
-        if($isPaymentActive && $this::PAYMENT_KEY == 'NOVALNET_INVOICE') {
-            $guaranteeStatus = $this->paymentService->isGuaranteePaymentToBeDisplayed($this->basketRepository, 'novalnet_guaranteed_invoice');
-            $isPaymentActive = ($guaranteeStatus == 'normal') ? true : false;
-        }
-
-        if($isPaymentActive && $this::PAYMENT_KEY == 'NOVALNET_SEPA') {
-            $guaranteeStatus = $this->paymentService->isGuaranteePaymentToBeDisplayed($this->basketRepository, 'novalnet_guaranteed_sepa');
-            $isPaymentActive = ($guaranteeStatus == 'normal') ? true : false;
-        }
-
-        if($isPaymentActive && in_array($this::PAYMENT_KEY, ['NOVALNET_GUARANTEED_INVOICE', 'NOVALNET_GUARANTEED_SEPA'])) {
-            $guaranteeStatus = $this->paymentService->isGuaranteePaymentToBeDisplayed($this->basketRepository, strtolower($this::PAYMENT_KEY));
-            $isPaymentActive = ($guaranteeStatus == 'guarantee') ? true : false;
-        }
-
-        if($isPaymentActive) {
-            // Check if the payment allowed for mentioned countries
-            $activatePaymentAllowedCountry = true;
-            if($allowedCountry = $this->settingsService->getPaymentSettingsValue('allowed_country', strtolower($this::PAYMENT_KEY))) {
-                $activatePaymentAllowedCountry  = $this->paymentService->allowedCountries($this->basketRepository, $allowedCountry);
-            }
-
-            // Check if the Minimum order amount value met to payment display condition
-            $activatePaymentMinimumAmount = true;
-            $minimumAmount = trim($this->settingsService->getPaymentSettingsValue('minimum_order_amount', strtolower($this::PAYMENT_KEY)));
-            if(!empty($minimumAmount) && is_numeric($minimumAmount)) {
-                $activatePaymentMinimumAmount = $this->paymentService->getMinBasketAmount($this->basketRepository, $minimumAmount);
-            }
-
-            // Check if the Maximum order amount value met to payment display condition
-            $activatePaymentMaximumAmount = true;
-            $maximumAmount = trim($this->settingsService->getPaymentSettingsValue('maximum_order_amount', strtolower($this::PAYMENT_KEY)));
-            if(!empty($maximumAmount) && is_numeric($maximumAmount)) {
-                $activatePaymentMaximumAmount = $this->paymentService->getMaxBasketAmount($this->basketRepository, $maximumAmount);
-            }
-
-            return (bool) ($this->paymentService->isMerchantConfigurationValid() && $activatePaymentAllowedCountry && $activatePaymentMinimumAmount && $activatePaymentMaximumAmount);
-        }
-            return false;
+        return true;
     }
 
     /**
