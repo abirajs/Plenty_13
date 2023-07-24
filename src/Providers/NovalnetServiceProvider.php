@@ -36,8 +36,9 @@ class NovalnetServiceProvider extends ServiceProvider
 	{
 		// Register the payment methods
 		$this->registerPaymentMethods($payContainer);
+		
 		// Render the payment methods
-        $this->registerPaymentRendering($eventDispatcher, $basketRepository, $paymentHelper, $paymentService, $sessionStorage, $twig, $settingsService);
+        	$this->registerPaymentRendering($eventDispatcher, $paymentHelper, $twig);
         
 		// Set the Novalnet Assistant
 		pluginApp(WizardContainerContract::class)->register('payment-novalnet-assistant', NovalnetAssistant::class);
