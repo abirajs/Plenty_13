@@ -39,10 +39,56 @@ class NovalnetServiceProvider extends ServiceProvider
 						  Dispatcher $eventDispatcher,
 						  Twig $twig,
 						)
-    {
+	{
+		// Register the payment methods
+		$this->registerPaymentMethods($payContainer);
+		// Render the payment methods
+        $this->registerPaymentRendering($eventDispatcher, $paymentHelper, $twig);
+        
 		// Set the Novalnet Assistant
 		pluginApp(WizardContainerContract::class)->register('payment-novalnet-assistant', NovalnetAssistant::class);
     }
     
 
+    /**
+     * Register the Novalnet payment methods in the payment method container
+     *
+     * @param PaymentMethodContainer $payContainer
+     *
+     * @return none
+     */
+    protected function registerPaymentMethods(PaymentMethodContainer $payContainer)
+    {
+         $payContainer->register('plenty_novalnet::NOVALNET', NovalnetPaymentMethod::class,
+            [
+                AfterBasketChanged::class,
+                AfterBasketItemAdd::class,
+                AfterBasketCreate::class
+            ]);
+    }
+    
+    
+     protected function registerPaymentRendering(Dispatcher $eventDispatcher,
+                                                PaymentHelper $paymentHelper,
+                                                Twig $twig,
+                                                )
+    {
+	// Listen for the event that gets the payment method content
+    $eventDispatcher->listen(GetPaymentMethodContent::class,
+     function(GetPaymentMethodContent $event) use($paymentHelper, $twig)
+      {
+		$paymentKey = $paymentHelper->getPaymentKeyByMop($event->getMop());
+		if($paymentKey)
+		{
+			$content = $twig->render('Novalnet::NovalnetPayment', [
+													'formData'     => 'data',
+													'nnPaymentUrl' => 'url'
+					   ]);
+			$contentType = 'htmlContent';
+			$event->setValue($content);
+			$event->setType($contentType);
+		}
+      });
+	}
+	
 }
