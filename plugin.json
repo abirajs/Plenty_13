@@ -1,6 +1,6 @@
 {
-    "name": "Novalnet",
-    "namespace": "Novalnet",
+    "name": "Novalnet2",
+    "namespace": "Novalnet2",
     "marketplaceName": {"de": "Novalnet", "en": "Novalnet"},
     "type": "payment",
     "version": "13.0.0",
