@@ -11,6 +11,7 @@ namespace Novalnet\Services;
 use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\SettingsService;
 use Plenty\Modules\Basket\Models\Basket;
+use Novalnet\Constants\NovalnetConstants;
 use Plenty\Modules\Account\Address\Contracts\AddressRepositoryContract;
 
 /**
