@@ -31,6 +31,10 @@
         "guzzlehttp/guzzle": "6.3.*"
     },
     "serviceProvider": "Novalnet\\Providers\\NovalnetServiceProvider",
+    "runOnBuild": [
+        "Novalnet\\Migrations\\CreateNovalnetPaymentMethods1200",
+        "Novalnet\\Migrations\\CreateSettingsTable"
+    ],
 
     "dataProviders"    :
     [
