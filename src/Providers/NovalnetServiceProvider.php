@@ -81,8 +81,8 @@ class NovalnetServiceProvider extends ServiceProvider
 		if($paymentKey)
 		{
 			$content = $twig->render('Novalnet::NovalnetPayment', [
-													'formData'     => 'data',
-													'nnPaymentUrl' => 'url'
+							'formData'     => 'data',
+							'nnPaymentUrl' => 'url'
 					   ]);
 			$contentType = 'htmlContent';
 			$event->setValue($content);
