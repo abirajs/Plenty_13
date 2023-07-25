@@ -10,6 +10,7 @@ namespace Novalnet\Helper;
 
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
 use Plenty\Modules\Account\Address\Contracts\AddressRepositoryContract;
+use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class PaymentHelper
@@ -18,6 +19,7 @@ use Plenty\Modules\Account\Address\Contracts\AddressRepositoryContract;
  */
 class PaymentHelper
 {
+    use Loggable;
     /**
      * @var AddressRepositoryContract
      */
