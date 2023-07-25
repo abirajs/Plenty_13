@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is used for creating custom Settings table
+ * This file is used for creating custom Novanet Settings table
  *
- * @author       Novalnet GMBH
+ * @author       Novalnet AG
  * @copyright(C) Novalnet
  * @license      https://www.novalnet.de/payment-plugins/kostenlos/lizenz
  */
@@ -12,19 +12,19 @@ use Novalnet\Models\Settings;
 use Plenty\Modules\Plugin\DataBase\Contracts\Migrate;
 
 /**
- * Class CreateSettingsTable
+ * Class CreateNovalnetSettingsTable
  *
  * @package Novalnet\Migrations
  */
-class CreateSettingsTable
+class CreateNovalnetSettingsTable
 {
     /**
-     * Create transaction log table
+     * Create Novalnet Settings table
      *
      * @param Migrate $migrate
      */
     public function run(Migrate $migrate)
     {
-        $migrate->createTable(Settings::class);
+        $migrate->createTable(NovalnetSettings::class);
     }
 }
