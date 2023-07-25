@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is used to create a settings model in the database
+ * This file is used to create a novalnet settings model in the database
  *
  * @author       Novalnet AG
  * @copyright(C) Novalnet
@@ -15,7 +15,7 @@ use Novalnet\Services\PaymentService;
 use Plenty\Plugin\Log\Loggable;
 
 /**
- * Class Settings
+ * Class NovalnetSettings
  *
  * @property int $id
  * @property int $clientId
@@ -26,7 +26,7 @@ use Plenty\Plugin\Log\Loggable;
  *
  * @package Novalnet\Models
  */
-class Settings extends Model
+class NovalnetSettings extends Model
 {
     use Loggable;
 
@@ -42,11 +42,11 @@ class Settings extends Model
      */
     public function getTableName(): string
     {
-        return 'Novalnet::settings';
+        return 'Novalnet::novalnetsettings';
     }
 
     /**
-     * Insert the configuration values into settings table
+     * Insert the configuration values into novalnet settings table
      *
      * @param array $data
      *
@@ -70,7 +70,7 @@ class Settings extends Model
     }
 
     /**
-     * Update the configuration values into settings table
+     * Update the configuration values into novalnet settings table
      *
      * @param array $data
      *
@@ -103,7 +103,7 @@ class Settings extends Model
     }
 
     /**
-     * Save the configuration values into settings table
+     * Save the configuration values into novalnet settings table
      *
      * @return Model
      */
@@ -116,12 +116,12 @@ class Settings extends Model
         // Update the Novalnet API version 
         $paymentService->updateApiVersion($this->value);
         // Log the configuration updated time for the reference
-        $this->getLogger(__METHOD__)->error('Updated Novalnet settings details ' . $this->updatedAt, $this);
+        $this->getLogger(__METHOD__)->error('Updated Novalnet novalnetsettings details ' . $this->updatedAt, $this);
         return $database->save($this);
     }
 
     /**
-     * Delete the configuration values into settings table
+     * Delete the configuration values into novalnet settings table
      *
      * @return bool
      */
