@@ -13,6 +13,7 @@ use Novalnet\Services\SettingsService;
 use Plenty\Modules\Basket\Models\Basket;
 use Novalnet\Constants\NovalnetConstants;
 use Plenty\Modules\Account\Address\Contracts\AddressRepositoryContract;
+use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class PaymentService
@@ -21,7 +22,8 @@ use Plenty\Modules\Account\Address\Contracts\AddressRepositoryContract;
  */
 class PaymentService
 {
-	/**
+    use Loggable;
+    /**
      * @var SettingsService
      */
     private $settingsService;
