@@ -35,4 +35,12 @@
         "Novalnet\\Migrations\\CreateNovalnetPaymentMethods1200",
         "Novalnet\\Migrations\\CreateSettingsTable"
     ],
+    "dataProviders"    :
+    [
+        {
+            "key"         : "Novalnet\\Providers\\NovalnetOrderConfirmationDataProvider",
+            "name"        : "Novalnet payment details",
+            "description" : "Display the Novalnet payment details on the order confirmation page"
+        }
+    ]
 }
