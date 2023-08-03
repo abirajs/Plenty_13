@@ -15,5 +15,5 @@ namespace Novalnet\Methods;
  */
 class Novalnet extends NovalnetPaymentAbstract
 {
-    const PAYMENT_KEY = 'NOVALNET_NOVALNET';
+    const PAYMENT_KEY = 'NOVALNET_DEFAULT';
 }
