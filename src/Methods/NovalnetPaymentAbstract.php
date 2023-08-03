@@ -77,7 +77,18 @@ abstract class NovalnetPaymentAbstract extends PaymentMethodBaseService
     {
         return true;
     }
-
+    
+    /**
+     * Check the configuration if the payment method is active
+     * Return true only if the payment method is active
+     *
+     * @return bool
+     */
+    public function isBackendActive(): bool
+    {
+         return true;
+    }
+    
     /**
      * Get the name of the payment method. The name can be entered in the multilingualism.
      *
