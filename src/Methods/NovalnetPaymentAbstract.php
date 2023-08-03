@@ -75,7 +75,7 @@ abstract class NovalnetPaymentAbstract extends PaymentMethodBaseService
      */
     public function isActive(): bool
     {
-        return true;
+        return false;
     }
 
     /**
