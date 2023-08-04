@@ -12,6 +12,7 @@ namespace Novalnet\Providers;
 use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
 use Novalnet\Assistants\NovalnetAssistant;
+use Novalnet\Methods\NovalnetPaymentAbstract;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Events\Dispatcher;
 use Plenty\Plugin\Templates\Twig;
