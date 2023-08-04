@@ -59,7 +59,7 @@ class NovalnetServiceProvider extends ServiceProvider
      */
     protected function registerPaymentMethods(PaymentMethodContainer $payContainer)
     {
-         $payContainer->register('plenty_novalnet::NOVALNET', NovalnetPaymentMethod::class,
+         $payContainer->register('plenty_novalnet::NOVALNET', NovalnetPaymentAbstract::class,
             [
                 AfterBasketChanged::class,
                 AfterBasketItemAdd::class,
