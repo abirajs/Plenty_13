@@ -25,7 +25,7 @@
         "Ceres": ">= 4.0.0"
     },
     "platform": {
-        "php": ">=7.3 <8.1"
+        "php": ">=7.3 <8.2"
     },
     "dependencies": {
         "guzzlehttp/guzzle": "6.3.*"
