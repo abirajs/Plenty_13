@@ -24,7 +24,9 @@ use Plenty\Plugin\Log\Loggable;
  */
 class NovalnetOrderConfirmationDataProvider
 {
-	use Loggable;
+     use Loggable;
+
+     const PAYMENT_KEY = 'Novalnet';
     /**
      * Displaying transaction comments in the order confirmation page
      *
