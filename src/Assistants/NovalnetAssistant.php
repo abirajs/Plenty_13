@@ -89,6 +89,7 @@ class NovalnetAssistant extends WizardProvider
 
         $config = $this->createGlobalConfiguration($config);
         $config = $this->createWebhookConfiguration($config);
+        $config = $this->createPaymentMethodConfiguration($config);
         return $config;
     }
 
@@ -246,6 +247,62 @@ class NovalnetAssistant extends WizardProvider
                     ]
                 ]
         ];
+        return $config;
+    }
+    
+        /**
+    * Create the payment methods configurations
+    *
+    * @param array $config
+    *
+    * @return array
+    */
+    public function createPaymentMethodConfiguration($config)
+    {
+       foreach($this->paymentHelper->getPaymentMethodsKey() as $paymentMethodKey) {
+          $paymentMethodKey = str_replace('_','',ucwords(strtolower($paymentMethodKey),'_'));
+          $paymentMethodKey[0] = strtolower($paymentMethodKey[0]);
+
+          $config['steps'][$paymentMethodKey] =
+          [
+                "title"     => 'Customize.' . $paymentMethodKey,
+                "sections"  =>
+                [
+                    [
+                        "title"         => 'Customize.' . $paymentMethodKey,
+                        "description"   => 'Customize.' . $paymentMethodKey .'Desc',
+                        "form"          =>
+                        [
+                            $paymentMethodKey .'PaymentActive' =>
+                            [
+                                'type'      => 'checkbox',
+                                'options'   => [
+                                                'name' => 'NovalnetAssistant.novalnetPaymentActiveLabel'
+                                               ]
+                            ],
+                            $paymentMethodKey . 'TestMode' =>
+                            [
+                                'type'      => 'checkbox',
+                                'options'   => [
+                                                'name' => 'NovalnetAssistant.novalnetTestModeLabel'
+                                               ]
+                            ],
+                           $paymentMethodKey . 'PaymentLogo' =>
+                           [
+                                'type'      => 'file',
+                                'options'   => [
+                                                'name'              => 'NovalnetAssistant.novalnetPaymentLogoLabel',
+                                                'showPreview'       => true,
+                                                'allowedExtensions' => ['svg', 'png', 'jpg', 'jpeg'],
+                                                'allowFolders'      => false
+                                               ]
+                            ]
+                        ]
+                    ]
+                 ]
+          ];
+
+        }
         return $config;
     }
 
