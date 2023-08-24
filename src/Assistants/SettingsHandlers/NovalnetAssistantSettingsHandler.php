@@ -41,6 +41,15 @@ class NovalnetAssistantSettingsHandler implements WizardSettingsHandler
             'novalnet_webhook_email_to' =>  $data['novalnetWebhookEmailTo'] ?? '',
         ];
         
+        // Payment method common configuration values
+        foreach($paymentHelper->getPaymentMethodsKey() as $paymentMethodKey) {
+            $paymentKey=str_replace('_','',ucwords(strtolower($paymentMethodKey),'_'));
+            $paymentKey[0] = strtolower($paymentKey[0]);
+            $paymentMethodKey = strtolower($paymentMethodKey);
+            $novalnetSettings[$paymentMethodKey]['payment_active']               = $data[$paymentKey . 'PaymentActive'] ?? '';
+            $novalnetSettings[$paymentMethodKey]['test_mode']                    = $data[$paymentKey . 'TestMode'] ?? '';
+            $novalnetSettings[$paymentMethodKey]['payment_logo']                 = $data[$paymentKey . 'PaymentLogo'] ?? '';
+		}
         /** @var SettingsService $settingsService */
         $settingsService=pluginApp(SettingsService::class);
         $settingsService->updateSettings($novalnetSettings, $clientId, $pluginSetId);
