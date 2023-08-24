@@ -13,6 +13,7 @@ use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\SettingsService;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
+use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class NovalnetAssistantSettingsHandler
@@ -21,6 +22,7 @@ use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
  */
 class NovalnetAssistantSettingsHandler implements WizardSettingsHandler
 {
+    use Loggable;
     public function handle(array $postData)
     {
         /** @var PluginSetRepositoryContract $pluginSetRepo */
@@ -52,6 +54,7 @@ class NovalnetAssistantSettingsHandler implements WizardSettingsHandler
 		}
         /** @var SettingsService $settingsService */
         $settingsService=pluginApp(SettingsService::class);
+	$this->getLogger(__METHOD__)->alert('$novalnetSettings', $novalnetSettings);
         $settingsService->updateSettings($novalnetSettings, $clientId, $pluginSetId);
         return true;
     }
