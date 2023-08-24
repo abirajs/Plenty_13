@@ -13,7 +13,6 @@ use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\SettingsService;
 use Plenty\Modules\Plugin\PluginSet\Contracts\PluginSetRepositoryContract;
 use Plenty\Modules\Wizard\Contracts\WizardSettingsHandler;
-use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class NovalnetAssistantSettingsHandler
@@ -22,7 +21,6 @@ use Plenty\Plugin\Log\Loggable;
  */
 class NovalnetAssistantSettingsHandler implements WizardSettingsHandler
 {
-    use Loggable;
     public function handle(array $postData)
     {
         /** @var PluginSetRepositoryContract $pluginSetRepo */
@@ -44,17 +42,14 @@ class NovalnetAssistantSettingsHandler implements WizardSettingsHandler
         ];
         
         // Payment method common configuration values
-        foreach($paymentHelper->getPaymentMethodsKey() as $paymentMethodKey) {
-            $paymentKey=str_replace('_','',ucwords(strtolower($paymentMethodKey),'_'));
-            $paymentKey[0] = strtolower($paymentKey[0]);
-            $paymentMethodKey = strtolower($paymentMethodKey);
-            $novalnetSettings[$paymentMethodKey]['payment_active']               = $data[$paymentKey . 'PaymentActive'] ?? '';
-            $novalnetSettings[$paymentMethodKey]['test_mode']                    = $data[$paymentKey . 'TestMode'] ?? '';
-            $novalnetSettings[$paymentMethodKey]['payment_logo']                 = $data[$paymentKey . 'PaymentLogo'] ?? '';
-		}
+        $novalnetSettings=[
+            'novalnet_payment_activey'       =>  $data['novalnetPaymentActive'] ?? '',
+            'novalnet_payment_logo'          =>  $data['novalnetPaymentLogo'] ?? '',
+
+        ];
+           
         /** @var SettingsService $settingsService */
         $settingsService=pluginApp(SettingsService::class);
-	$this->getLogger(__METHOD__)->alert('$novalnetSettings', $novalnetSettings);
         $settingsService->updateSettings($novalnetSettings, $clientId, $pluginSetId);
         return true;
     }
