@@ -65,6 +65,8 @@ class Settings extends Model
             'novalnet_order_creation'       => $data['novalnet_order_creation'],
             'novalnet_webhook_testmode'     => $data['novalnet_webhook_testmode'],
             'novalnet_webhook_email_to'     => $data['novalnet_webhook_email_to'],
+            'novalnet_payment_active'       => $data['novalnet_payment_active'],
+            'novalnet_payment_logo'         => $data['novalnet_payment_logo'],
         ];
         return $this->save();
     }
@@ -98,7 +100,13 @@ class Settings extends Model
         }
         if(isset($data['novalnet_webhook_email_to'])) {
             $this->value['novalnet_webhook_email_to'] = $data['novalnet_webhook_email_to'];
-        }      
+        }
+        if(isset($data['novalnet_payment_active'])) {
+            $this->value['novalnet_payment_active'] = $data['novalnet_payment_active'];
+        }  
+        if(isset($data['novalnet_payment_logo'])) {
+            $this->value['novalnet_payment_logo'] = $data['novalnet_payment_logo'];
+        }        
         return $this->save();
     }
 
