@@ -269,8 +269,8 @@ class NovalnetAssistant extends WizardProvider
                 "sections"  =>
                 [
                     [
-                        "title"         => 'Customize.' . $paymentMethodKey,
-                        "description"   => 'Customize.' . $paymentMethodKey .'Desc',
+                        "title"         => 'Novalnet',
+                        "description"   => 'Novalnet Payment Method',
                         "form"          =>
                         [
                             $paymentMethodKey .'PaymentActive' =>
@@ -279,14 +279,7 @@ class NovalnetAssistant extends WizardProvider
                                 'options'   => [
                                                 'name' => 'NovalnetAssistant.novalnetPaymentActiveLabel'
                                                ]
-                            ],
-                            $paymentMethodKey . 'TestMode' =>
-                            [
-                                'type'      => 'checkbox',
-                                'options'   => [
-                                                'name' => 'NovalnetAssistant.novalnetTestModeLabel'
-                                               ]
-                            ],
+                            ],                   
                            $paymentMethodKey . 'PaymentLogo' =>
                            [
                                 'type'      => 'file',
