@@ -43,7 +43,7 @@ class NovalnetAssistantSettingsHandler implements WizardSettingsHandler
         
         // Payment method common configuration values
         $novalnetSettings=[
-            'novalnet_payment_activey'       =>  $data['novalnetPaymentActive'] ?? '',
+            'novalnet_payment_active'       =>  $data['novalnetPaymentActive'] ?? '',
             'novalnet_payment_logo'          =>  $data['novalnetPaymentLogo'] ?? '',
 
         ];
