@@ -259,11 +259,9 @@ class NovalnetAssistant extends WizardProvider
     */
     public function createPaymentMethodConfiguration($config)
     {
-       foreach($this->paymentHelper->getPaymentMethodsKey() as $paymentMethodKey) {
-          $paymentMethodKey = str_replace('_','',ucwords(strtolower($paymentMethodKey),'_'));
-          $paymentMethodKey[0] = strtolower($paymentMethodKey[0]);
 
-          $config['steps'][$paymentMethodKey] =
+
+          $config['steps']['novalnet'] =
           [
                 "title"     => 'Novalnet',
                 "sections"  =>
@@ -273,14 +271,14 @@ class NovalnetAssistant extends WizardProvider
                         "description"   => 'Novalnet Payment Method',
                         "form"          =>
                         [
-                            $paymentMethodKey .'PaymentActive' =>
+                            'novalnetPaymentActive' =>
                             [
                                 'type'      => 'checkbox',
                                 'options'   => [
                                                 'name' => 'NovalnetAssistant.novalnetPaymentActiveLabel'
                                                ]
                             ],                   
-                           $paymentMethodKey . 'PaymentLogo' =>
+                           'novalnetPaymentLogo' =>
                            [
                                 'type'      => 'file',
                                 'options'   => [
@@ -295,7 +293,7 @@ class NovalnetAssistant extends WizardProvider
                  ]
           ];
 
-        }
+        
         return $config;
     }
 
