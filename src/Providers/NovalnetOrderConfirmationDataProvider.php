@@ -24,9 +24,7 @@ use Plenty\Plugin\Log\Loggable;
  */
 class NovalnetOrderConfirmationDataProvider
 {
-     use Loggable;
-
-     const PAYMENT_KEY = 'Novalnet';
+	use Loggable;
     /**
      * Displaying transaction comments in the order confirmation page
      *
@@ -41,17 +39,17 @@ class NovalnetOrderConfirmationDataProvider
                          $arg
                         )
     {
-		$settingsService    = pluginApp(SettingsService::class);
-		$test = $settingsService->getPaymentSettingsValue('novalnet_payment_active');
-		$this->getLogger(__METHOD__)->error('Novalnet::assignPlentyPaymentToPlentyOrder', $test);
-    		 $demo = $settingsService->getPaymentSettingsValue('novalnet_tariff_id');
-		$this->getLogger(__METHOD__)->error('Novalnet::demo', $demo);
+	$settingsService    = pluginApp(SettingsService::class);
+	if($settingsService->getPaymentSettingsValue('novalnet_payment_active') == true) {
+	$this->getLogger(__METHOD__)->error('yes', 'yes');
         return $twig->render('Novalnet::NovalnetOrderPayment',
                             [
                                 'transactionComments' => 'transactioncomments',
                                 'cashpaymentToken' => 'cashpayment',
-                              
                             ]);
-   
+	} else {
+	$this->getLogger(__METHOD__)->error('no', 'yes');
+	return '';	
+	}
     }
 }
