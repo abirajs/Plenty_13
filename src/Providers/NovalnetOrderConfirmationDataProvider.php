@@ -40,7 +40,7 @@ class NovalnetOrderConfirmationDataProvider
                         )
     {
 		$settingsService    = pluginApp(SettingsService::class);
-		$test = $settingsService->getPaymentSettingsValue('payment_active', 'novalnetNovalnet');
+		$test = $settingsService->getPaymentSettingsValue('payment_active', strtolower($this::PAYMENT_KEY));
 		$this->getLogger(__METHOD__)->error('Novalnet::assignPlentyPaymentToPlentyOrder', $test);
         return $twig->render('Novalnet::NovalnetOrderPayment',
                             [
