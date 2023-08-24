@@ -14,6 +14,8 @@ use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
 use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
 use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
+use Novalnet\Services\SettingsService;
+use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class NovalnetOrderConfirmationDataProvider
@@ -22,6 +24,7 @@ use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFact
  */
 class NovalnetOrderConfirmationDataProvider
 {
+	use Loggable;
     /**
      * Displaying transaction comments in the order confirmation page
      *
@@ -36,8 +39,10 @@ class NovalnetOrderConfirmationDataProvider
                          $arg
                         )
     {
-
-         return $twig->render('Novalnet::NovalnetOrderPayment',
+		$settingsService    = pluginApp(SettingsService::class);
+		$test = $settingsService->getPaymentSettingsValue('payment_active', 'novalnetNovalnet');
+		$this->getLogger(__METHOD__)->error('Novalnet::assignPlentyPaymentToPlentyOrder', $test);
+        return $twig->render('Novalnet::NovalnetOrderPayment',
                             [
                                 'transactionComments' => 'transactioncomments',
                                 'cashpaymentToken' => 'cashpayment',
