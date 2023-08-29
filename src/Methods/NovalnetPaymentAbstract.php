@@ -162,7 +162,7 @@ abstract class NovalnetPaymentAbstract extends PaymentMethodBaseService
         if($orderId > 0) {
             return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -180,7 +180,7 @@ abstract class NovalnetPaymentAbstract extends PaymentMethodBaseService
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
