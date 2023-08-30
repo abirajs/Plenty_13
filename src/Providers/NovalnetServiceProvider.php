@@ -13,6 +13,7 @@ use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
 use Novalnet\Assistants\NovalnetAssistant;
 use Novalnet\Methods\NovalnetPaymentAbstract;
+use Novalnet\Methods\Novalnet;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Events\Dispatcher;
 use Plenty\Plugin\Templates\Twig;
@@ -60,7 +61,7 @@ class NovalnetServiceProvider extends ServiceProvider
      */
     protected function registerPaymentMethods(PaymentMethodContainer $payContainer)
     {
-         $payContainer->register('plenty_novalnet::NOVALNET', NovalnetPaymentAbstract::class,
+         $payContainer->register('plenty_novalnet::NOVALNET', Novalnet::class,
             [
                 AfterBasketChanged::class,
                 AfterBasketItemAdd::class,
