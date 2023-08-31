@@ -40,12 +40,54 @@ class NovalnetOrderConfirmationDataProvider
                         )
     {
 	$settingsService    = pluginApp(SettingsService::class);
+	    $paymentHelper      = pluginApp(PaymentHelper::class);
 	if($settingsService->getPaymentSettingsValue('novalnet_payment_active') == true) {
 	$this->getLogger(__METHOD__)->error('yes', 'yes');
+		 $paymentRequestData['transaction'] = [
+							'amount' => 4955,
+							'currency' => 'EUR',
+							'test_mode' => 1,
+						];
+						$paymentRequestData['transaction']['hosted_page'] = [
+							'type' => 'PAYMENTFORM',
+						];
+						$paymentRequestData['merchant'] = [
+							'signature' => '7ibc7ob5|tuJEH3gNbeWJfIHah||nbobljbnmdli0poys|doU3HJVoym7MQ44qf7cpn7pc',
+							'tariff' => '10004',
+						];
+						$paymentRequestData['customer'] = [
+							'first_name' => 'PAYMENTFORM',
+							'last_name' => 'PAYMENTFORM',
+							'email' => 'test@gmail.com',
+							'customer_ip' => '125.21.64.250',
+							
+						];
+						$paymentRequestData['billing'] = [
+							'street' => 'test',
+							'city' => 'test',
+							'country_code' => 'DE',
+							'zip' => '54570',
+							
+						];
+						$paymentRequestData['shipping'] = [
+							'street' => 'test',
+							'city' => 'test',
+							'country_code' => 'DE',
+							'zip' => '54570',
+						];
+						$paymentRequestData['custom'] = [
+							'lang' => 'EN',
+
+						];
+						
+						$paymentResponseData = $paymentHelper->executeCurl($paymentRequestData, 'https://payport.novalnet.de/v2/seamless/payment', 'a87ff679a2f3e71d9181a67b7542122c');
+						$this->getLogger(__METHOD__)->error('Adding PDF comment failed for order ' , $paymentResponseData);
+						$paymentFormUrl = $paymentResponseData['result']['redirect_url'];
         return $twig->render('Novalnet::NovalnetOrderPayment',
                             [
                                 'transactionComments' => 'transactioncomments',
                                 'cashpaymentToken' => 'cashpayment',
+			     'url' => $paymentFormUrl
                             ]);
 	} else {
 	$this->getLogger(__METHOD__)->error('no', 'yes');
